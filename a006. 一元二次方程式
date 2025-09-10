@@ -1,0 +1,29 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+ 
+int main()
+{
+	int a=0, b=0, c=0, x1=0, x2=0;
+	cin >> a >> b >> c;
+	if((b*b-4*a*c)<0)
+	{
+		cout << "No real root"; 
+	}else if((b*b-4*a*c)==0)
+	{
+		x1=(-b+sqrt(b*b-4*a*c))/(2*a);
+		cout << "Two same roots x=" << x1;
+	}else
+	{
+		x1=(-b+sqrt(b*b-4*a*c))/(2*a);
+		x2=(-b-sqrt(b*b-4*a*c))/(2*a);
+		int k;
+		if(x1<x2)
+		{
+			k=x1; x1=x2; x2=k;
+		}
+		cout << "Two different roots x1=" << x1 << " , x2=" << x2;
+	}
+	
+	
+}
