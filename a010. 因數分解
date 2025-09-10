@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+ 
+int main()
+{
+	int x=0, i=0, j=0, k=0, tem1[100], tem2[100]; //1存質數 2存次方
+	
+	cin >> x;
+	
+	for(i=2;i<=x;i++)
+	{
+		k=0;
+		while(x%i==0)
+		{
+			k=k+1;
+			x=x/i;
+		}
+		
+		if(k>0)
+		{
+			tem1[j]=i;
+			tem2[j]=k;
+			j=j+1;
+		}
+		
+	}	
+
+	for(k=0;k<j;k++)
+	{
+		cout << tem1[k];
+		if(tem2[k]!=1)
+		{
+			cout << "^" << tem2[k];
+		}
+		
+		if(k!=j-1){cout << " * ";}
+	}
+	
+	
+	
+}
