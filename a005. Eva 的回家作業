@@ -1,0 +1,46 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+ 
+int main()
+{
+	int n=0;  //有n個陣列 
+	cin >> n;
+	
+	int arr[n][5];
+	
+	for(int i=0; i<n;i++)
+	{
+		for(int j =0; j<4;j++)
+		{
+			cin >> arr[i][j];
+		}
+	}
+	
+	
+		for(int i=0; i<n;i++)
+	{
+		if(arr[i][1]/arr[i][0]==arr[i][2]/arr[i][1])
+		{
+			arr[i][4]=arr[i][3]*(arr[i][1]/arr[i][0]);
+		}
+		else
+		{
+			arr[i][4]=arr[i][3]+arr[i][1]-arr[i][0];
+		}
+	}
+	
+	
+	
+	
+	    for (int i = 0; i < n; i++) 
+		{
+        	for (int j = 0; j < 5; j++) 
+			{
+    	 	   cout << arr[i][ j] << " ";
+    		}
+    		cout << endl;
+    	}
+
+	
+}
