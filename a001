@@ -2,9 +2,13 @@
 using namespace std;
  
 int main()
-{
+{//輸入字串並加hello
 	string a="0";
 	cin >> a;
 	cout << "hello, " << a;
+	
+	getchar();
+	getchar();
+	return 0;
 
 }
