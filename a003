@@ -2,7 +2,7 @@
 using namespace std;
  
 int main()
-{
+{//算命
 	int M=0,D=0,S=0;
 	cin >> M >> D;
 	S=(M*2+D)%3;
@@ -19,5 +19,9 @@ int main()
 	{
 		cout << "大吉";
 	}
+
+    getchar();
+	getchar();
+	return 0;
 
 }
