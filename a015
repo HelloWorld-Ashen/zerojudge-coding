@@ -3,7 +3,7 @@
 using namespace std;
  
 int main()
-{	
+{	//轉置陣列
 	int r=0, c=0;
 	
 	
@@ -28,6 +28,9 @@ int main()
 			cout << endl;
 		}
 	}
+    
+	getchar();
+	getchar();
+	return 0;
 	
-	
-}      //哥們，* 測資檔會包含多組矩陣資料 (真的很搞...
+}          //哥們，* 測資檔會包含多組矩陣資料 (真的很搞...
