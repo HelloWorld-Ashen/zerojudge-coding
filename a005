@@ -3,8 +3,8 @@
 using namespace std;
  
 int main()
-{
-	int n=0;  //有n個陣列 
+{//數列等加或等比預測 
+	int n=0;  //��n�Ӱ}�C 
 	cin >> n;
 	
 	int arr[n][5];
@@ -41,6 +41,10 @@ int main()
     		}
     		cout << endl;
     	}
+
+    getchar();
+	getchar();
+	return 0;
 
 	
 }
