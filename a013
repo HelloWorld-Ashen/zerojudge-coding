@@ -22,7 +22,7 @@ string intToRoman(int num) {
 }
 
 int main()
-{
+{//羅馬數字絕對值相減
     string x, y;
     int A[100], a=0, B[100], b=0,
     i=0, j=0;
@@ -97,4 +97,8 @@ int main()
         if(sub==0){cout << "ZERO" << endl;}
         else cout <<  intToRoman(sub) << endl;
     }
+
+    getchar();
+	getchar();
+	return 0;
 }
