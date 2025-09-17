@@ -2,8 +2,8 @@
 using namespace std;
  
 int main()
-{
-	int x=0, i=0, j=0, k=0, tem1[100], tem2[100]; //1存質數 2存次方
+{//質因數分解
+	int x=0, i=0, j=0, k=0, tem1[100], tem2[100]; //1�s��� 2�s����
 	
 	cin >> x;
 	
@@ -36,6 +36,9 @@ int main()
 		if(k!=j-1){cout << " * ";}
 	}
 	
+    getchar();
+	getchar();
+	return 0;
 	
 	
 }
