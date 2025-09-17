@@ -2,9 +2,13 @@
 using namespace std;
  
 int main()
-{
+{//A+B
 	int a=0,b=0;
 	cin >> a >> b;
 	cout << a+b;
+
+    getchar();
+	getchar();
+	return 0;
 
 }
