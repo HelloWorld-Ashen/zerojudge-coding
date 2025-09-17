@@ -2,12 +2,15 @@
 using namespace std;
  
 int main()
-{
+{//密碼解碼
 	int k=7; char x=' ', y=' ';
 	while(cin >> x)
 	{
-		y = char(int(x) - 7);//int(y)=int(x)-7;是錯的
+		y = char(int(x) - 7);
 		cout << y;
 	}
 	
+    getchar();
+	getchar();
+	return 0;
 }
