@@ -1,0 +1,70 @@
+#include <iostream>
+#include<vector>
+using namespace std;
+
+int main()
+{
+	char x='\0';
+	int id[2], sum=0;
+	
+	cin >> x >> id[1];
+	
+	
+	switch(x)
+	{
+		case 'A': id[0]=10; break;
+		case 'B': id[0]=11; break;
+		case 'C': id[0]=12; break;
+		case 'D': id[0]=13; break;
+		case 'E': id[0]=14; break;
+		case 'F': id[0]=15; break;
+		case 'G': id[0]=16; break;
+		case 'H': id[0]=17; break;
+		case 'I': id[0]=34; break;
+		case 'J': id[0]=18; break;
+		case 'K': id[0]=19; break;
+		case 'L': id[0]=20; break;
+		case 'M': id[0]=21; break;
+		case 'N': id[0]=22; break;
+		case 'O': id[0]=35; break;
+		case 'P': id[0]=23; break;
+		case 'Q': id[0]=24; break;
+		case 'R': id[0]=25; break;
+		case 'S': id[0]=26; break;
+		case 'T': id[0]=27; break;
+		case 'U': id[0]=28; break;
+		case 'V': id[0]=29; break;
+		case 'W': id[0]=32; break;
+		case 'X': id[0]=30; break;
+		case 'Y': id[0]=31; break;
+		case 'Z': id[0]=33; break;
+		
+		default: cout << "fake" << endl; break;
+	}
+	
+	sum=(id[0] / 10) + (id[0] % 10) * 9 
+		+ (id[1] / 100000000) * 8
+		+ (id[1] % 100000000 / 10000000) * 7
+		+ (id[1] % 100000000 % 10000000 / 1000000 ) * 6
+		+ (id[1] % 100000000 % 10000000 % 1000000 / 100000 ) * 5
+		+ (id[1] % 100000000 % 10000000 % 1000000 % 100000 / 10000 ) * 4
+		+ (id[1] % 100000000 % 10000000 % 1000000 % 100000 % 10000 / 1000 ) * 3
+		+ (id[1] % 100000000 % 10000000 % 1000000 % 100000 % 10000 % 1000 / 100 ) * 2
+		+ (id[1] % 100000000 % 10000000 % 1000000 % 100000 % 10000 % 1000 % 100 / 10 ) * 1
+		+ (id[1] % 100000000 % 10000000 % 1000000 % 100000 % 10000 % 1000 % 100 % 10 ) * 1;
+		
+	if(sum%10==0)
+	{
+		cout << "real" << endl;
+	}else
+	{
+		cout << "fake" << endl;
+	}
+	
+	
+	getchar();
+	getchar();
+	return 0;
+
+    
+}
