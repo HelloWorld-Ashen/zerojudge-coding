@@ -1,0 +1,218 @@
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+int main()
+{   // 大數的四則運算
+    vector<int> a, b, c;
+    string sa, sb;
+    char x;
+
+    cin >> sa >> x >> sb;
+    for(char ch : sa) a.push_back(ch - '0');
+    for(char ch : sb) b.push_back(ch - '0');
+
+    if(x == '+' || x == '-')
+    {
+        while(a.size() > b.size())
+        {
+            b.insert(b.begin(), 0);
+        }
+        while(a.size() < b.size())
+        {
+            a.insert(a.begin(), 0);
+        }
+    }
+
+    switch (x)
+    {
+        case '+':
+        {
+            int carry = 0;
+            for (int i = (int)a.size() - 1; i >= 0; --i)
+            {
+                int s = a[i] + b[i] + carry;
+                c.push_back(s % 10);   // 低位先放（LSB first）
+                carry = s / 10;
+            }
+            if (carry != 0) { c.push_back(carry); }
+
+            for (int k = (int)c.size() - 1; k >= 0; --k)
+                cout << c[k];
+            break;
+        }
+
+        case '-':
+        {
+            bool neg = false;
+            // 判斷 a < b
+            bool a_smaller = false;
+            if(a.size() < b.size()) a_smaller = true;
+            else if(a.size() == b.size())
+            {
+                for(int i=0;i<a.size();++i)
+                {
+                    if(a[i]<b[i]) { a_smaller=true; break; }
+                    else if(a[i]>b[i]) break;
+                }
+            }
+            if(a_smaller)
+            {
+                swap(a,b);
+                neg = true;
+            }
+
+            for(int i1 = (int)a.size() - 1; i1 >= 0; --i1)
+            {
+                if(a[i1] - b[i1] < 0)
+                {
+                    a[i1-1] = a[i1-1] - 1;
+                    a[i1] = a[i1] + 10;
+                }
+
+                int s1 = a[i1] - b[i1];
+                c.push_back(s1);
+            }
+            // 去掉前導零
+            while(c.size() > 1 && c.back() == 0)
+                c.pop_back();
+            if(neg) cout << '-';
+            for(int k1 = (int)c.size() - 1; k1 >= 0; --k1)
+                cout << c[k1];
+            break;
+        }
+
+        case '*':
+        {
+            int na = (int)a.size();
+            int nb = (int)b.size();
+            vector<vector<int>> d(nb, vector<int>(na + nb, 0));
+
+            int carry1 = 0, m = 0;
+            for (int j = nb - 1; j >= 0; --j)
+            {
+                carry1 = 0;
+                for (int i2 = na - 1; i2 >= 0; --i2)
+                {
+                    int s2 = a[i2] * b[j] + carry1;
+                    d[m][i2 + j + 1] = s2 % 10;
+                    carry1 = s2 / 10;
+                }
+                d[m][j] = carry1;
+                m++;
+            }
+
+            carry1 = 0;
+            int s3 = 0;
+            for (int i3 = na + nb - 1; i3 >= 0; --i3) {
+                s3 = 0;
+                for (int i4 = 0; i4 < nb; ++i4)
+                    s3 += d[i4][i3];
+                s3 += carry1;
+                c.push_back(s3 % 10);
+                carry1 = s3 / 10;
+            }
+            while (carry1 != 0) { c.push_back(carry1 % 10); carry1 /= 10; }
+
+            while (c.size() > 1 && c.back() == 0) { c.pop_back(); }
+
+            for (int k2 = (int)c.size() - 1; k2 >= 0; --k2)
+                cout << c[k2];
+            break;
+        }
+
+        case '/':
+        {
+            c.clear(); // 確保商乾淨
+            vector<int> remainder; // 動態餘數
+
+            int idx = 0;
+            while(idx < (int)a.size())
+            {
+                remainder.push_back(a[idx++]); // 往餘數加位
+
+                // 去掉前導零
+                while(remainder.size() > 1 && remainder[0] == 0)
+                    remainder.erase(remainder.begin());
+
+                int p = 0;
+                // 試商 1~9
+                for(int tryP = 1; tryP <= 9; ++tryP)
+                {
+                    vector<int> tmp = b;
+                    int carry = 0;
+                    for(int i = (int)tmp.size() - 1; i >= 0; --i)
+                    {
+                        int val = tmp[i]*tryP + carry;
+                        tmp[i] = val % 10;
+                        carry = val / 10;
+                    }
+                    if(carry > 0) tmp.insert(tmp.begin(), carry);
+
+                    // 比較 tmp 和 remainder
+                    bool ok = true;
+                    if(tmp.size() > remainder.size()) ok = false;
+                    else if(tmp.size() < remainder.size()) ok = true;
+                    else
+                    {
+                        for(int i = 0; i < (int)tmp.size(); ++i)
+                        {
+                            if(tmp[i] > remainder[i]) { ok=false; break; }
+                            else if(tmp[i] < remainder[i]) { ok=true; break; }
+                        }
+                    }
+                    if(ok) p = tryP;
+                }
+                c.push_back(p);
+
+                // remainder -= b*p
+                if(p > 0)
+                {
+                    vector<int> tmp = b;
+                    int carry = 0;
+                    for(int i = (int)tmp.size() - 1; i >= 0; --i)
+                    {
+                        int val = tmp[i]*p + carry;
+                        tmp[i] = val % 10;
+                        carry = val / 10;
+                    }
+                    if(carry > 0) tmp.insert(tmp.begin(), carry);
+
+                    // 補零對齊
+                    while(tmp.size() < remainder.size()) tmp.insert(tmp.begin(), 0);
+
+                    // 減法
+                    for(int i = (int)remainder.size() - 1; i >= 0; --i)
+                    {
+                        if(remainder[i] < tmp[i])
+                        {
+                            int j = i-1;
+                            while(j >=0 && remainder[j]==0) { remainder[j]=9; j--; }
+                            remainder[j]--;
+                            remainder[i] += 10;
+                        }
+                        remainder[i] -= tmp[i];
+                    }
+
+                    // 去掉前導零
+                    while(remainder.size() > 1 && remainder[0] == 0)
+                        remainder.erase(remainder.begin());
+                }
+            }
+
+            // 去掉商前導零
+            while(c.size() > 1 && c[0] == 0)
+                c.erase(c.begin());
+
+            for(int k = 0; k < (int)c.size(); ++k)
+                cout << c[k];
+
+            break;
+        }
+    }
+
+    getchar(); // 保留 getchar
+    getchar();
+    return 0;
+}
