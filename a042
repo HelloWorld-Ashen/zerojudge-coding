@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+ 
+int main()
+{
+    int x=0, ans=0;
+
+    while(cin >> x)
+    {
+        if(x==1)
+        {
+            cout << 2 << endl;
+        }else if(x==2)
+        {
+            cout << 4 << endl;
+        }else
+        {
+            ans= 2*(x-1)+1 + (1+(x-2))*(x-2) + 1; 
+            cout << ans << endl;
+        }
+
+        
+    }
+
+    getchar();
+    getchar();
+    return 0;
+}
