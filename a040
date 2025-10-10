@@ -1,0 +1,55 @@
+#include <iostream>
+#include<vector>
+#include<cmath>
+using namespace std;
+ 
+int main()
+{
+    int n=0, m=0;
+    int a; //a=armstrong number
+    vector<int> ans;
+
+    cin >> n >> m;
+
+    for(int i=n;i<=m;i++)
+    {
+
+        if(i/10==0) //1位
+        {
+            ans.push_back(i);
+        }else if(i/10!=0 && i/100==0 && i==pow((i%10),2)+pow((i/10),2)) //2位
+        {
+            ans.push_back(i);
+        }else if(i/100!=0 && i/1000==0 && i==pow((i%10),3)+pow((i/10%10),3)+pow((i/100),3)) //3位
+        {
+            ans.push_back(i);
+        }else if(i/1000!=0 && i/10000==0 && i==pow((i%10),4)+pow((i/10%10),4)+pow((i/100%10),4)+pow((i/1000%10),4)) //4位
+        {
+            ans.push_back(i);
+        }else if(i/10000!=0 && i/100000==0 && i==pow((i%10),5)+pow((i/10%10),5)+pow((i/100%10),5)+pow((i/1000%10),5)+pow((i/10000%10),5)) //5位
+        {
+            ans.push_back(i);
+        }else if(i/100000!=0 && i/1000000==0 && i==pow((i%10),6)+pow((i/10%10),6)+pow((i/100%10),6)+pow((i/1000%10),6)+pow((i/10000%10),6)+pow((i/100000%10),6)) //6位
+        {
+            ans.push_back(i);
+        } 
+    }
+
+    if(ans.size()==0)
+    {
+        cout << "none";
+    }
+
+    for(int j=0;j<ans.size();j++)
+    {
+        cout << ans[j];
+        if(j!=ans.size()-1)
+        {
+            cout << " ";
+        }
+    }
+
+    getchar();
+    getchar();
+    return 0;
+}
