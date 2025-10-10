@@ -1,0 +1,49 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+ 
+int main()
+{
+    int i=0, j=0, m=0, n=0; //m>n
+    int t=0, num=1, max=0;
+    vector<int> ans;
+
+    while(cin >>  i >> j)
+    {
+        ans.clear();
+        if(j>i){m=j;n=i;}
+        else{m=i;n=j;}
+
+        for(int k=n;k<=m;k++)
+        {
+            t=k;
+            num=1;
+            while(t!=1)
+            {
+                if(t%2!=0){t=3*t+1;}
+                else{t=t/2;}
+                num++;
+            }
+            ans.push_back(num);
+        }
+
+        max=ans[0];
+
+        for(int v=0;v<ans.size();v++)
+        {
+            if(max<ans[v])
+            {
+                max=ans[v];
+            }
+        }
+        
+        cout << i << " " << j << " " << max << endl;
+    
+    }
+    
+
+
+    getchar();
+    getchar();
+    return 0;
+}
