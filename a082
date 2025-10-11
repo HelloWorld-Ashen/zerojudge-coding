@@ -1,0 +1,81 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    int row=0, columns=0;
+    int bot_r=0, bot_c=0;
+    char bot_look='\0';
+    vector<vector<int>> map;
+    string order="\0";
+
+    cin >> columns >> row;
+    map.assign(row+1, vector<int>(columns+1,0));
+
+    while(cin >> bot_c >> bot_r >> bot_look)//bot_direction turn to vector_direction
+    {
+        order="\0";
+        cin >> order;
+
+        bool lost = false;
+
+        for(int i=0; i<order.size(); i++) //bot's place = 1, never bot = 0, bot's scent = 2
+        {
+            if(order[i]=='F')
+            {
+                int nx=bot_c, ny=bot_r;
+
+                if(bot_look=='N') ny++;
+                else if(bot_look=='S') ny--;
+                else if(bot_look=='E') nx++;
+                else if(bot_look=='W') nx--;
+
+                // if lost and no scent
+                if(nx<0 || nx>columns || ny<0 || ny>row)
+                {
+                    if(map[bot_r][bot_c]!=2)
+                    {
+                        map[bot_r][bot_c]=2;
+                        cout << bot_c << " " << bot_r << " " << bot_look << " LOST" << endl;
+                        lost = true;
+                        break;
+                    }
+                    else
+                    {
+                        // ignore sucicide
+                        continue;
+                    }
+                }
+                else
+                {
+                    bot_c = nx;
+                    bot_r = ny;
+                }
+            }
+            else if(order[i]=='L')
+            {
+                if(bot_look=='N') bot_look='W';
+                else if(bot_look=='S') bot_look='E';
+                else if(bot_look=='W') bot_look='S';
+                else if(bot_look=='E') bot_look='N';
+            }
+            else if(order[i]=='R')
+            {
+                if(bot_look=='N') bot_look='E';
+                else if(bot_look=='S') bot_look='W';
+                else if(bot_look=='W') bot_look='N';
+                else if(bot_look=='E') bot_look='S';
+            }
+        }
+
+        if(lost!=true)
+        {
+            cout << bot_c << " " << bot_r << " " << bot_look << endl;
+        }
+    }
+
+    getchar();
+    getchar();
+    return 0;
+}
