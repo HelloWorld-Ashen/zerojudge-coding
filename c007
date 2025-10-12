@@ -1,0 +1,33 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    string line;
+    bool left = true; // 判斷下次遇到 " 是左還是右
+
+    while (getline(cin, line))  // 逐行讀取
+    {
+        for (int i = 0; i < line.size(); i++)
+        {
+            if (line[i] == '"')
+            {
+                if (left)
+                    cout << "``";
+                else
+                    cout << "''";
+                left = !left;
+            }
+            else
+            {
+                cout << line[i];
+            }
+        }
+        cout << endl; // 每行結束換行
+    }
+    
+    getchar();
+    getchar();
+    return 0;
+}
